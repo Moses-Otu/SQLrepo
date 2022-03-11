@@ -22,15 +22,15 @@ FROM dbo.crimestat$
 SELECT [UCR CRIME CATEGORY],
 	COUNT (*) AS frequency
 FROM dbo.crimestat$
-GROUP BY [UCR CRIME CATEGORY];
+GROUP BY 1 ;
 
 --We want to see the frequency of the categories in descending order
 
 SELECT [UCR CRIME CATEGORY],
 	COUNT (*) AS frequency
 FROM dbo.crimestat$
-GROUP BY [UCR CRIME CATEGORY] 
-ORDER BY frequency DESC;--dESC is introduced to specify the order of the result 
+GROUP BY 1
+ORDER BY 2 DESC;--dESC is introduced to specify the order of the result 
 
 --What is the percentage of the frequency of values in the category column
 
@@ -39,8 +39,8 @@ SELECT
 	count(*) as frequency,
 	Round(100*count(*)/sum(count(*)) OVER(),2) as prcentage
 FROM dbo.crimestat$
-GROUP BY [UCR CRIME CATEGORY]
-ORDER BY frequency DESC;
+GROUP BY 1
+ORDER BY 2 DESC;
 
 --What year was the highest number of crime recorded?
 
@@ -48,16 +48,16 @@ SELECT
 	 YEAR ([OCCURRED ON]) AS 'year_occured',
 	COUNT(*) AS FREQUENCY
 FROM dbo.crimestat$
-GROUP BY year([OCCURRED ON])
+GROUP BY 1
 ORDER BY 
-FREQUENCY desc, year ([OCCURRED ON]) DESC
+2 desc, year 1 DESC
 
 --what is the maximum lenght of time it took to commit a crime
 
 SELECT  [OCCURRED ON], [OCCURRED TO],DATEDIFF(MINUTE, [OCCURRED ON],[OCCURRED TO]) AS 'Total_crime_time'
 FROM dbo.crimestat$
-GROUP BY [OCCURRED ON], [OCCURRED TO]
-ORDER BY DATEDIFF(MINUTE, [OCCURRED ON],[OCCURRED TO]) desc;
+GROUP BY 1, 2
+ORDER BY 3 desc;
 -----This is interesting :). I wander what crime could take that long to commit
 			--let's find out
 
@@ -66,8 +66,8 @@ SELECT  [OCCURRED ON], [OCCURRED TO],
 	[UCR CRIME CATEGORY],
 	[PREMISE TYPE]
 FROM dbo.crimestat$
-GROUP BY [OCCURRED ON], [OCCURRED TO],[UCR CRIME CATEGORY],[PREMISE TYPE]
-ORDER BY DATEDIFF(MINUTE, [OCCURRED ON],[OCCURRED TO]) desc;
+GROUP BY 1, 2,3
+ORDER BY 3,1 desc;
 
 ---Result from the last query reveals an important question. What kind of premise do some the crimes occurs?
 --RAPE
