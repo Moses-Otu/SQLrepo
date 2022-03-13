@@ -1,3 +1,4 @@
+--This is the first query run and we are working with the description CITY = "SQL City" and CRIME ="Murder"
 SELECT 
 	* 
 FROM 
@@ -5,10 +6,12 @@ FROM
 WHERE 
 	date = 20180115
 AND	
-	TYPE='murder' --this query gives a piece of informatiion ro get started
+	TYPE='murder' 
+--Query Result --
+--Security footage shows that there were 2 witnesses. The first witness lives at the last house on "Northwestern Dr". 
+--The second witness, named Annabel, lives somewhere on "Franklin Ave"
 
-
---Query 2a
+--Query 2a seeks to get details of the witness who leaves at the end Northwestern DR
 
 SELECT 
 	* 
@@ -18,10 +21,10 @@ WHERE
 	address_street_name = "Northwestern Dr"
 
 ORDER BY
-	address_number DESC ----this query identifies one of the suspects as 'ID' 14887	,'Name' Morty Schapiro	'licence ID' 118009	4919	Northwestern Dr	'ssn' 111564949
+	address_number DESC 
 	
 
---Query 2b
+--Query 2b seeks to get details of the witness Annabel.
 
 
 SELECT 
@@ -35,14 +38,14 @@ LIKE
 AND
 	address_street_name
 LIKE
-	"%Franklin ave%"    ---16371	Annabel Miller	490173	103	Franklin Ave	318771143
+	"%Franklin ave%"    ---16371
 	
 	
 --query 3 The two witnessess provided us with information that would help us sleuth further
 
 SELECT 
 	gfc.membership_id,gfc.check_in_date,
-	gfm.id,get_fit_now_member.name,gfm.membership_status
+	gfm.id,gfm.name,gfm.membership_status
 FROM 
 	get_fit_now_check_in AS gfc
 JOIN
@@ -56,7 +59,11 @@ AND
 LIKE
 	"48Z%"
 	
---QUERY 4
+--Query above helps in streamlining our search into 2 gym members with gold status card with membershipID %48Z%
+	
+
+
+--QUERY 4 we were given info on the plate number and we also have 2 suspects. when we run the plate number we would get the muderer.
 
 SELECT 
 	p.name, d.plate_number
@@ -75,4 +82,4 @@ AND
 	
 -THE BLOODY KILLER'S NAME IS JEREMY BOWERS"
 
---Now who is the mastermind
+--Now who is the mastermind?
